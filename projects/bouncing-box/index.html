@@ -8,7 +8,7 @@
 		.box {
 			width: 70px;
 			height: 70px;
-			background-color: teal;
+			background-color: #4a412a;
 			font-size: 300%;
 			text-align: center;
 			user-select: none;
@@ -17,8 +17,11 @@
 			top: 100px;
 			left: 200px;  /* <--- Change me! */
 		}
-		.board{
+		.board{	
 			height: 100vh;
+		}
+		body {
+			background-color: #87a077;
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -67,6 +70,7 @@
 			var positionX = 0;
 			var points = 1;
 			var speed = 10;
+			var randNum = Math.random() * 500;
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
 			it should move the Box to a new location. If the box drifts off the screen
@@ -88,9 +92,14 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-				positionX = 0;
+				positionX = Math.random() * boardWidth;;
 				changeBoxText(points)
-				speed += 3	
+				if (speed > 0) {
+					speed += 3
+				} else {
+					speed  -= 3
+				}
+
 
 			};
 		})();
