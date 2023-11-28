@@ -20,13 +20,24 @@ var init = function (window) {
         ////////////////////////////////////////////////////////////
         
         // TODO 1 : Declare and initialize our variables
-
+        var circle;			// variable to hold a single circle when creating circles / iterating
+        var circles = [];	// variable to store all circles in one Array
 
         // TODO 2 : Create a function that draws a circle 
-        
+        // Code to draw a circle
+
+        function drawCircle(){
+            circle = draw.randomCircleInArea(canvas, true, true, "#999", 2);
+            physikz.addRandomVelocity(circle, canvas);
+            view.addChild(circle);
+            circles.push(circle);
+        }
 
         // TODO 3 / 7 : Call the drawCircle() function 
 
+        for (var loopsCompleted = 0; loopsCompleted < 100; loopsCompleted++) {
+            drawCircle();
+          }
 
         ////////////////////////////////////////////////////////////
         ///////////////// PROGRAM LOGIC ////////////////////////////
@@ -39,11 +50,14 @@ var init = function (window) {
         */
         function update() {
             // TODO 4 : Update the circle's position //
-
+            for (var loopsCompleted = 0; loopsCompleted < 100; loopsCompleted++) {
+                physikz.updatePosition(circles[loopsCompleted]);
+              }
             
             // TODO 5 / 10 : Call game.checkCirclePosition() on your circles.
-           
-
+            for (var loopsCompleted = 0; loopsCompleted < 100; loopsCompleted++) {
+                game.checkCirclePosition(circles[loopsCompleted]);
+              }
             // TODO 9 : Iterate over the array
            
             
@@ -57,12 +71,24 @@ var init = function (window) {
         game.checkCirclePosition = function(circle) {
 
             // if the circle has gone past the RIGHT side of the screen then place it on the LEFT
-            if ( circle.x > canvas.width ) {
+            var rightEdge = circle.x + circle.radius;
+            var leftEdge = circle.x - circle.radius;
+            var topEdge = circle.y - circle.radius;
+            var bottomEdge = circle.y + circle.radius;
+
+            if (leftEdge > canvas.width) {
                 circle.x = 0;
             }
-            
             // TODO 6 : YOUR CODE STARTS HERE //////////////////////
-            
+            if (rightEdge < 0) {
+                circle.x = canvas.width;
+            }
+            if (topEdge > canvas.height ) {
+                circle.y = 0;
+            }
+            if (bottomEdge < 0) {
+                circle.y = canvas.height;
+            }
 
 
             // YOUR TODO 6 CODE ENDS HERE //////////////////////////
