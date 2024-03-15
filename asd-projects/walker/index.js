@@ -27,7 +27,8 @@ function runProgram(){
     y: 10, // the y-coordinate location for the box
     xSpeed: 0, // the speed for the box along the x-axis
     ySpeed: 0, // the speed for the box along the y-axis
-    it: -1
+    it: -1,
+    allSpeed: 5,
   }
 
   var playTwo = {
@@ -35,7 +36,8 @@ function runProgram(){
     y: 380,
     xSpeed: 0,
     ySpeed: 0,
-    it: 1
+    it: 1,
+    allSpeed: 3,
   }
 
   // one-time setup
@@ -66,28 +68,28 @@ var tick = 0
   */
   function handleKeyDown(event) {
     if (event.which === key.left) {
-      walker.xSpeed = -5
+      walker.xSpeed = - walker.allSpeed
     }
     if (event.which === key.up) {
-      walker.ySpeed = -5
+      walker.ySpeed = - walker.allSpeed
     }
     if (event.which === key.right) {
-      walker.xSpeed = 5
+      walker.xSpeed = walker.allSpeed
     }
     if (event.which === key.down) {
-      walker.ySpeed = 5
+      walker.ySpeed = walker.allSpeed
     }
     if (event.which === key.a) {
-      playTwo.xSpeed = -5
+      playTwo.xSpeed = - playTwo.allSpeed
     }
     if (event.which === key.w) {
-      playTwo.ySpeed = -5
+      playTwo.ySpeed = - playTwo.allSpeed
     }
     if (event.which === key.d) {
-      playTwo.xSpeed = 5
+      playTwo.xSpeed = playTwo.allSpeed
     }
     if (event.which === key.s) {
-      playTwo.ySpeed = 5
+      playTwo.ySpeed = playTwo.allSpeed
     }
   }
   function handleKeyUp(event) {
@@ -170,24 +172,32 @@ boardWandH = $("#board").width()
     }
   }
   function playerCollision(){
-    for (var i = -50; i < 50; i++){
-      if (walker.x === playTwo.x - i){
-        for (var j = -50; j < 50; j++){
-          if (walker.y === playTwo.y - j) {
-            walker.it *= -1
-            playTwo.it *= -1
+    if (tick > 60) {
+      for (var i = -50; i < 50; i++){
+        if (walker.x === playTwo.x - i){
+          for (var j = -50; j < 50; j++){
+            if (walker.y === playTwo.y - j) {
+              walker.it *= -1
+              playTwo.it *= -1
+              tick = 0
+            }
           }
         }
       }
     }
+    
   }
   function isIt(){
-    if (walker.it === 1) 
+    if (walker.it === 1) {
       $("#walker").css("background", "red")
       $("#playTwo").css("background", "cyan")
+      walker.allSpeed = 3
+      playTwo.allSpeed = 5
     } else if (playTwo.it === 1) {
       $("#walker").css("background", "cyan")
       $("#playTwo").css("background", "red")
+      walker.allSpeed = 5
+      playTwo.allSpeed = 3
     }
   }
 }
