@@ -68,28 +68,28 @@ var tick = 0
   */
   function handleKeyDown(event) {
     if (event.which === key.left) {
-      walker.xSpeed = - walker.allSpeed
+      walker.xSpeed = - 5
     }
     if (event.which === key.up) {
-      walker.ySpeed = - walker.allSpeed
+      walker.ySpeed = - 5
     }
     if (event.which === key.right) {
-      walker.xSpeed = walker.allSpeed
+      walker.xSpeed = 5
     }
     if (event.which === key.down) {
-      walker.ySpeed = walker.allSpeed
+      walker.ySpeed = 5
     }
     if (event.which === key.a) {
-      playTwo.xSpeed = - playTwo.allSpeed
+      playTwo.xSpeed = - 5
     }
     if (event.which === key.w) {
-      playTwo.ySpeed = - playTwo.allSpeed
+      playTwo.ySpeed = - 5
     }
     if (event.which === key.d) {
-      playTwo.xSpeed = playTwo.allSpeed
+      playTwo.xSpeed = 5
     }
     if (event.which === key.s) {
-      playTwo.ySpeed = playTwo.allSpeed
+      playTwo.ySpeed = 5
     }
   }
   function handleKeyUp(event) {
@@ -191,13 +191,9 @@ boardWandH = $("#board").width()
     if (walker.it === 1) {
       $("#walker").css("background", "red")
       $("#playTwo").css("background", "cyan")
-      walker.allSpeed = 3
-      playTwo.allSpeed = 5
     } else if (playTwo.it === 1) {
       $("#walker").css("background", "cyan")
       $("#playTwo").css("background", "red")
-      walker.allSpeed = 5
-      playTwo.allSpeed = 3
     }
   }
 }
